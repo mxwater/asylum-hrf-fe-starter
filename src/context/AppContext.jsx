@@ -1,13 +1,12 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import axios from 'axios';
-import testData from '../data/test_data.json';
 import { useLocalStorage } from '../hooks/useLocalStorage.js';
 
 const AppContext = createContext({});
 
 const useAppContextProvider = () => {
   const [graphData, setGraphData] = useState({ yearResults: [], citizenshipResults: [] });
-  const [isDataLoading, setIsDataLoading] = useState(true); // Data is loading initially
+  const [isDataLoading, setIsDataLoading] = useState(false); 
 
   useLocalStorage({ graphData, setGraphData });
 
@@ -20,7 +19,6 @@ const useAppContextProvider = () => {
       return null;
     }
   };
-  
 
   const getCitizenshipResults = async () => {
     try {
@@ -31,7 +29,6 @@ const useAppContextProvider = () => {
       return null;
     }
   };
-  
 
   const updateQuery = async () => {
     setIsDataLoading(true);
@@ -39,6 +36,7 @@ const useAppContextProvider = () => {
 
   const fetchData = async () => {
     try {
+      setIsDataLoading(true); 
       const fiscalData = await getFiscalData();
       const citizenshipData = await getCitizenshipResults();
 
@@ -51,7 +49,7 @@ const useAppContextProvider = () => {
     } catch (error) {
       console.error("Error fetching data:", error);
     } finally {
-      setIsDataLoading(false);
+      setIsDataLoading(false); 
     }
   };
 
@@ -62,10 +60,8 @@ const useAppContextProvider = () => {
   const getYears = () => graphData?.yearResults?.map(({ fiscal_year }) => Number(fiscal_year)) ?? [];
 
   useEffect(() => {
-    if (isDataLoading) {
-      fetchData();
-    }
-  }, [isDataLoading]);
+    fetchData(); 
+  }, []); 
 
   return {
     graphData,
