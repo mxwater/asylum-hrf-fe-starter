@@ -5,15 +5,9 @@ import { useLocalStorage } from '../hooks/useLocalStorage.js';
 
 const AppContext = createContext({});
 
-/**
- * TODO: Ticket 2:
- * - Use axios to fetch the data
- * - Store the data
- * - Populate the graphs with the stored data
- */
 const useAppContextProvider = () => {
-  const [graphData, setGraphData] = useState(testData);
-  const [isDataLoading, setIsDataLoading] = useState(false);
+  const [graphData, setGraphData] = useState({ yearResults: [], citizenshipResults: [] });
+  const [isDataLoading, setIsDataLoading] = useState(true); // Data is loading initially
 
   useLocalStorage({ graphData, setGraphData });
 
