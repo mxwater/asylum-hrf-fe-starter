@@ -27,11 +27,6 @@ export const LandingPage = () => {
 
   return (
     <div className="w-full bg-gray-100 p-10">
-      {/* Title and Subtitle */}
-      <h1 className="text-4xl font-bold text-center mt-8 text-gray-800">Asylum Office Grant Rate Tracker</h1>
-      <p className="text-center text-lg mt-4 mb-12 text-gray-700">
-        The Asylum Office Grant Rate Tracker provides asylum seekers, researchers, policymakers, and the public an interactive tool to explore USCIS data on Asylum Office decisions.
-      </p>
 
       {/* Visualization Buttons */}
       <div className="flex justify-center space-x-8 mb-12">
