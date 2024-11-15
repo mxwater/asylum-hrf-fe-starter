@@ -6,7 +6,7 @@ const AppContext = createContext({});
 
 const useAppContextProvider = () => {
   const [graphData, setGraphData] = useState({ yearResults: [], citizenshipResults: [] });
-  const [isDataLoading, setIsDataLoading] = useState(false); 
+  const [isDataLoading, setIsDataLoading] = useState(false);
 
   useLocalStorage({ graphData, setGraphData });
 
@@ -35,22 +35,17 @@ const useAppContextProvider = () => {
   };
 
   const fetchData = async () => {
-    try {
-      setIsDataLoading(true); 
-      const fiscalData = await getFiscalData();
-      const citizenshipData = await getCitizenshipResults();
+    setIsDataLoading(true);
+    const fiscalData = await getFiscalData();
+    const citizenshipData = await getCitizenshipResults();
 
-      if (fiscalData && citizenshipData) {
-        setGraphData({
-          yearResults: fiscalData,
-          citizenshipResults: citizenshipData,
-        });
-      }
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    } finally {
-      setIsDataLoading(false); 
+    if (fiscalData && citizenshipData) {
+      setGraphData({
+        yearResults: fiscalData.yearResults,
+        citizenshipResults: citizenshipData
+      });
     }
+    setIsDataLoading(false);
   };
 
   const clearQuery = () => {
