@@ -4,29 +4,37 @@ import { useLocalStorage } from '../hooks/useLocalStorage.js';
 
 const AppContext = createContext({});
 
+/**
+ * TODO: Ticket 2:
+ * - Use axios to fetch the data
+ * - Store the data
+ * - Populate the graphs with the stored data
+ */
 const useAppContextProvider = () => {
-  const [graphData, setGraphData] = useState({ yearResults: [], citizenshipResults: [] });
+  const [graphData, setGraphData] = useState(testData);
   const [isDataLoading, setIsDataLoading] = useState(false);
 
   useLocalStorage({ graphData, setGraphData });
 
   const getFiscalData = async () => {
     try {
-      const response = await axios.get('https://hrf-asylum-be-b.herokuapp.com/cases/fiscalSummary');
+      const response = await axios.get('https://hrf-asylum-be-b.herokuapp.com/cases/fiscalSummary', { timeout: 10000 });
       return response.data;
     } catch (error) {
-      console.error("Error fetching fiscal data:", error);
+      console.error('Error fetching fiscal data:', error);
       return null;
     }
   };
+  
+  
 
   const getCitizenshipResults = async () => {
     try {
       const response = await axios.get('https://hrf-asylum-be-b.herokuapp.com/cases/citizenshipSummary');
-      return response.data;
+      return response.data;  
     } catch (error) {
-      console.error("Error fetching citizenship data:", error);
-      return null;
+      console.error('Error fetching citizenship data:', error);
+      return [];
     }
   };
 
@@ -36,17 +44,29 @@ const useAppContextProvider = () => {
 
   const fetchData = async () => {
     setIsDataLoading(true);
-    const fiscalData = await getFiscalData();
-    const citizenshipData = await getCitizenshipResults();
-
-    if (fiscalData && citizenshipData) {
-      setGraphData({
-        yearResults: fiscalData.yearResults,
+    try {
+      const fiscalData = await getFiscalData();
+      const citizenshipData = await getCitizenshipResults();
+  
+     
+      const combinedData = {
+        fiscalResults: fiscalData, 
         citizenshipResults: citizenshipData
-      });
+      };
+  
+ 
+      setGraphData(combinedData);
+    } catch (error) {
+      console.error('Failed to fetch and combine data:', error);
+    } finally {
+      setIsDataLoading(false);
     }
-    setIsDataLoading(false);
   };
+  
+  
+  useEffect(() => {
+    fetchData();
+  }, []); 
 
   const clearQuery = () => {
     setGraphData({});
