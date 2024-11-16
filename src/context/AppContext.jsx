@@ -4,10 +4,9 @@ import { useLocalStorage } from '../hooks/useLocalStorage.js';
 
 const AppContext = createContext({});
 
-
 const useAppContextProvider = () => {
   const [graphData, setGraphData] = useState({ yearResults: [], citizenshipResults: [] });
-  const [isDataLoading, setIsDataLoading] = useState(false); 
+  const [isDataLoading, setIsDataLoading] = useState(false);
 
   useLocalStorage({ graphData, setGraphData });
 

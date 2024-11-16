@@ -3,11 +3,7 @@ import { getMapView, mapTypes } from './getMapView.jsx';
 import { GraphButtons } from '../../common/GraphButtons.jsx';
 import { Loading } from '../../common/Loading.jsx';
 import { getGraphsHeader } from './getGraphsHeader.js';
-
-import { useAppContext } from '../../../context/AppContext.jsx'
-
 import { useAppContext } from '../../../context/AppContext.jsx';
-
 
 export const GraphsPage = () => {
   const [mapView, setMapView] = useState(mapTypes.ScatterPlot);
