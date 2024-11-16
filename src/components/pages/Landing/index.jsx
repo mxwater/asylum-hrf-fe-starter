@@ -46,7 +46,7 @@ export const LandingPage = () => {
 
       {/* Data Action Buttons */}
       <div className="flex justify-center space-x-6 mb-16">
-        <button className="bg-[#6A6A5F] text-white px-6 py-3 rounded-lg">View the Data</button>
+        <button  onClick={() => navigate('/graphs')} className="bg-[#6A6A5F] text-white px-6 py-3 rounded-lg">View the Data</button>
         <button onClick={downloadCSV} className="bg-[#6A6A5F] text-white px-6 py-3 rounded-lg">Download the Data</button>
       </div>
 

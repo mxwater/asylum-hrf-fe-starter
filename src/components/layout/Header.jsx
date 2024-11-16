@@ -33,14 +33,16 @@ export default function Header() {
       </div>
 
       {/* Title and Subtitle */}
-      <div className="flex flex-col items-center">
-        <h1 className="text-5xl font-extrabold text-white mb-4">
-          Asylum Office Grant Rate Tracker
-        </h1>
-        <p className="text-lg text-white whitespace-nowrap">
-          The Asylum Office Grant Rate Tracker provides asylum seekers, researchers, policymakers, and the public an interactive tool to explore USCIS data on Asylum Office decisions.
-        </p>
-      </div>
+      {location.pathname === '/' && (
+        <div className="flex flex-col items-center justify-center h-[80px]">
+          <h1 className="text-6xl text-white mb-6">
+            Asylum Office Grant Rate Tracker
+          </h1>
+          <p className="text-base text-white text-center">
+            The Asylum Office Grant Rate Tracker provides asylum seekers, researchers, policymakers, and the public an interactive tool to explore USCIS data on Asylum Office decisions.
+          </p>
+        </div>
+      )}
     
     </header>
   );
