@@ -48,20 +48,41 @@ const useAppContextProvider = () => {
       const fiscalData = await getFiscalData();
       const citizenshipData = await getCitizenshipResults();
   
-     
-      const combinedData = {
-        fiscalResults: fiscalData, 
-        citizenshipResults: citizenshipData
-      };
+      if (fiscalData && citizenshipData) {
+        // Transform fiscalData to match the expected structure for ScatterPlot and HeatMap
+        const yearResults = fiscalData.yearResults.map(yearItem => ({
+          fiscal_year: yearItem.fiscal_year,       // Expected by ScatterPlot for x-axis
+          granted: yearItem.granted,               // Expected by ScatterPlot for y-axis
+          yearData: yearItem.yearData.map(office => ({
+            office: office.office,                 // Expected by HeatMap as x-axis
+            granted: office.granted,               // Expected by HeatMap as z-axis
+          })),
+        }));
   
- 
-      setGraphData(combinedData);
+        // Transform citizenshipData to match the structure expected by ChoroplethMap
+        const citizenshipResults = citizenshipData.map(item => ({
+          citizenship: item.citizenship,           // Expected by ChoroplethMap for locations
+          granted: item.granted,                   // Expected by ChoroplethMap for z-axis
+        }));
+  
+        // Combine transformed data
+        const combinedData = {
+          yearResults,            // For ScatterPlot and HeatMap
+          citizenshipResults,      // For ChoroplethMap
+        };
+  
+        // Update graphData in state
+        setGraphData(combinedData);
+      }
     } catch (error) {
-      console.error('Failed to fetch and combine data:', error);
+      console.error('Failed to fetch and transform data:', error);
     } finally {
       setIsDataLoading(false);
     }
   };
+  
+  
+  
   
   
   useEffect(() => {
