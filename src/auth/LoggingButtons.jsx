@@ -2,7 +2,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 
 
 export const LoggingButtons = () => {
-  const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
+  const { loginWithRedirect, logout, isAuthenticated } = useAuth0();
 
   const buttonText = isAuthenticated ? 'Log Out' : 'Log In';
 

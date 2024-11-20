@@ -7,8 +7,8 @@ import { NavLink, useLocation } from 'react-router-dom';
  * Implement authentication using Auth0
  */
 export default function Header() {
-  const { pathname } = useLocation(); // Get the current path
-  const isAuthenticated = false; // Will replace with Auth0 later
+  const { pathname } = useLocation(); 
+  const isAuthenticated = false; 
 
   return (
     <header className="primary-c w-full px-14 py-8 flex flex-col items-center text-center">
