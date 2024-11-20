@@ -1,14 +1,14 @@
 import Logo from '../../assets/logo.png';
 import { LoggingButtons } from '../../auth/LoggingButtons.jsx';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 
 /**
  * TODO: Ticket 3:
  * Implement authentication using Auth0
  */
 export default function Header() {
-  // TODO: Replace me
-  const isAuthenticated = false;
+  const { pathname } = useLocation(); // Get the current path
+  const isAuthenticated = false; // Will replace with Auth0 later
 
   return (
     <header className="primary-c w-full px-14 py-8 flex flex-col items-center text-center">
@@ -32,8 +32,8 @@ export default function Header() {
         </div>
       </div>
 
-      {/* Title and Subtitle */}
-      {location.pathname === '/' && (
+      {/* Title and Subtitle*/}
+      {pathname === '/' && (
         <div className="flex flex-col items-center justify-center h-[80px]">
           <h1 className="text-6xl text-white mb-6">
             Asylum Office Grant Rate Tracker
@@ -43,7 +43,6 @@ export default function Header() {
           </p>
         </div>
       )}
-    
     </header>
   );
 }
