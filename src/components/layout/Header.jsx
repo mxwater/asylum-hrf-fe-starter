@@ -1,6 +1,7 @@
 import Logo from '../../assets/logo.png';
 import { LoggingButtons } from '../../auth/LoggingButtons.jsx';
 import { NavLink, useLocation } from 'react-router-dom';
+import { useAuth0 } from '@auth0/auth0-react';
 
 /**
  * TODO: Ticket 3:
@@ -8,7 +9,7 @@ import { NavLink, useLocation } from 'react-router-dom';
  */
 export default function Header() {
   const { pathname } = useLocation(); 
-  const isAuthenticated = false; 
+  const { isAuthenticated } = useAuth0();
 
   return (
     <header className="primary-c w-full px-14 py-8 flex flex-col items-center text-center">
@@ -23,6 +24,7 @@ export default function Header() {
           <NavLink to="/graphs" className="nav-btn">
             Graphs
           </NavLink>
+          {/* Show Profile link only if the user is authenticated */}
           {isAuthenticated && (
             <NavLink to="/profile" className="nav-btn">
               Profile
@@ -32,7 +34,7 @@ export default function Header() {
         </div>
       </div>
 
-      {/* Title and Subtitle*/}
+      {/* Title and Subtitle */}
       {pathname === '/' && (
         <div className="flex flex-col items-center justify-center h-[80px]">
           <h1 className="text-6xl text-white mb-6">
