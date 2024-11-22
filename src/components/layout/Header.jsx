@@ -3,10 +3,7 @@ import { LoggingButtons } from '../../auth/LoggingButtons.jsx';
 import { NavLink, useLocation } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
 
-/**
- * TODO: Ticket 3:
- * Implement authentication using Auth0
- */
+
 export default function Header() {
   const { pathname } = useLocation(); 
   const { isAuthenticated } = useAuth0();
@@ -24,7 +21,7 @@ export default function Header() {
           <NavLink to="/graphs" className="nav-btn">
             Graphs
           </NavLink>
-          {/* Show Profile link only if the user is authenticated */}
+       
           {isAuthenticated && (
             <NavLink to="/profile" className="nav-btn">
               Profile
@@ -34,7 +31,7 @@ export default function Header() {
         </div>
       </div>
 
-      {/* Title and Subtitle */}
+     
       {pathname === '/' && (
         <div className="flex flex-col items-center justify-center h-[80px]">
           <h1 className="text-6xl text-white mb-6">
