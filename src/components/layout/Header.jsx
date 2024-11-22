@@ -7,6 +7,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 export default function Header() {
   const { pathname } = useLocation(); 
   const { isAuthenticated } = useAuth0();
+  
 
   return (
     <header className="primary-c w-full px-14 py-8 flex flex-col items-center text-center">
