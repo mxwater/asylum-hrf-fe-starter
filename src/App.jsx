@@ -26,26 +26,7 @@ const router = createBrowserRouter([
   },
 ]);
 
-export const App = () => {
-
-  const { isAuthenticated, getAccessTokenSilently } = useAuth0();
-
-  React.useEffect(() => {
-    const checkSession = async () => {
-      try {
-        if (!isAuthenticated) {
-          await getAccessTokenSilently(); // Recheck session silently
-        }
-      } catch (error) {
-        console.error('Error checking session:', error);
-      }
-    };
-
-    checkSession();
-  }, [isAuthenticated, getAccessTokenSilently]);
-
-
-  
+export const App = () => {  
 
 
   return (

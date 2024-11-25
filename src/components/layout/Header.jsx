@@ -35,10 +35,10 @@ export default function Header() {
      
       {pathname === '/' && (
         <div className="flex flex-col items-center justify-center h-[80px]">
-          <h1 className="text-6xl text-white mb-6">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl text-white text-center mb-4">
             Asylum Office Grant Rate Tracker
           </h1>
-          <p className="text-base text-white text-center">
+          <p className="text-base text-white text-center mt-2">
             The Asylum Office Grant Rate Tracker provides asylum seekers, researchers, policymakers, and the public an interactive tool to explore USCIS data on Asylum Office decisions.
           </p>
         </div>
